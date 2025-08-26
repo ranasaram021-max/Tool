@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online tools for document and image processing. Compress, convert, edit, merge PDFs and images with our easy-to-use tools.">
+    <title>Document & Image Tools Suite - Free Online PDF and Image Utilities</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #f72585;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4cc9f0;
+            --warning: #f9c74f;
+            --danger: #f94144;
+            --gray: #6c757d;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f0f2f5;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: var(--box-shadow);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            font-size: 2rem;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        .hero {
+            text-align: center;
+            padding: 3rem 1rem;
+            background: white;
+            margin: 2rem auto;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--gray);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .tool-card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .tool-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tool-header i {
+            font-size: 1.8rem;
+        }
+
+        .tool-header h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+
+        .tool-body {
+            padding: 1.5rem;
+        }
+
+        .tool-body p {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+        }
+
+        .tool-body button {
+            width: 100%;
+            padding: 12px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .tool-body button:hover {
+            background: var(--secondary);
+        }
+
+        .ad-container {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+        }
+
+        .ad-placeholder {
+            background: #e9ecef;
+            padding: 3rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+
+        .ad-label {
+            font-size: 0.9rem;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .tool-interface {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: var(--box-shadow);
+            display: none;
+        }
+
+        .tool-active .tool-interface {
+            display: block;
+        }
+
+        .upload-area {
+            border: 2px dashed var(--primary);
+            border-radius: var(--border-radius);
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .upload-area:hover {
+            border-color: var(--secondary);
+            background: #f8f9fa;
+        }
+
+        .upload-area i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .upload-area h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .upload-area p {
+            color: var(--gray);
+        }
+
+        .progress-bar {
+            height: 10px;
+            background: #e9ecef;
+            border-radius: 5px;
+            margin: 1.5rem 0;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .options-panel {
+            background: #f8f9fa;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .option-group {
+            margin-bottom: 1rem;
+        }
+
+        .option-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .option-group input,
+        .option-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary);
+        }
+
+        .btn-secondary {
+            background: #e9ecef;
+            color: var(--dark);
+        }
+
+        .btn-secondary:hover {
+            background: #dee2e6;
+        }
+
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 0 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.2rem;
+            position: relative;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 50px;
+            height: 2px;
+            background: var(--accent);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #495057;
+            color: #adb5bd;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+
+            nav ul {
+                justify-content: center;
+            }
+
+            .hero h2 {
+                font-size: 2rem;
+            }
+
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+        }
+
+        /* Accessibility features */
+        .skip-to-content {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--accent);
+            color: white;
+            padding: 8px;
+            z-index: 100;
+            transition: top 0.3s;
+        }
+
+        .skip-to-content:focus {
+            top: 0;
+        }
+
+        .high-contrast {
+            filter: contrast(140%);
+        }
+
+        .text-size button {
+            background: none;
+            border: none;
+            color: var(--primary);
+            cursor: pointer;
+            font-size: 1.2rem;
+            margin: 0 5px;
+        }
+
+        /* Dark mode support */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #121212;
+                color: #e0e0e0;
+            }
+
+            .tool-card,
+            .hero,
+            .ad-container,
+            .tool-interface {
+                background: #1e1e1e;
+                color: #e0e0e0;
+            }
+
+            .tool-body p {
+                color: #a0a0a0;
+            }
+
+            .option-group input,
+            .option-group select {
+                background: #2d2d2d;
+                color: #e0e0e0;
+                border-color: #3d3d3d;
+            }
+
+            .options-panel {
+                background: #252525;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-to-content">Skip to Content</a>
+
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-tools"></i>
+                <h1>DocImage Tools</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#tools">All Tools</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <div class="container">
+            <section class="hero">
+                <h2>Powerful Document & Image Tools</h2>
+                <p>Free online utilities to compress, convert, edit, and enhance your documents and images. No installation required - process files right in your browser!</p>
+            </section>
+
+            <div class="ad-container">
+                <div class="ad-label">Advertisement</div>
+                <div class="ad-placeholder">
+                    <!-- Google AdSense Ad Unit -->
+                    <script async src="ca-app-pub-8575564655582408/3622354034.js"></script>
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-EXAMPLE"
+                         data-ad-slot="EXAMPLE"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                    <script>
+                         (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+            </div>
+
+            <section id="tools" class="tools-grid">
+                <!-- Image Compressor -->
+                <div class="tool-card" data-tool="image-compressor">
+                    <div class="tool-header">
+                        <i class="fas fa-compress-arrows-alt"></i>
+                        <h3>Image Compressor</h3>
+                    </div>
+                    <div class="tool-body">
+                        <p>Reduce image file size without sacrificing quality. Supports JPEG, PNG, and WebP formats.</p>
+                        <button>Compress Image</button>
+                    </div>
+                </div>
+
+                <!-- PDF Compressor -->
+                <div class="tool-card" data-tool="pdf-compressor">
+                    <div class="tool-header">
+                        <i class="fas fa-file-pdf"></i>
+                        <h3>PDF Compressor</h3>
+                    </div>
+                    <div class="tool-body">
+                        <p>Reduce the size of your PDF files while maintaining quality. Perfect for email and web use.</p>
+                        <button>Compress PDF</button>
+                    </div>
+                </div>
+
+                <!-- Image Converter -->
+                <div class="tool-card" data-tool="image-converter">
+                    <div class="tool-header">
+                        <i class="fas fa-exchange-alt"></i>
+                        <h3>Image Converter</h3>
+                    </div>
+                    <div class="tool-body">
+                        <p>Convert between image formats: JPEG, PNG, WebP, GIF, BMP, and more with adjustable quality.</p>
+                        <button>Convert Image</button>
+                    </div>
+                </div>
+
+                <!-- PDF to Word -->
+                <div class="tool-card" data-tool="pdf-to-word">
+                    <div class="tool-header">
+                        <i class="fas fa-file-word"></i>
+                        <h3>PDF to Word</h3>
+                    </div>
+                    <div class="tool-body">
+                        <p>Convert PDF documents to editable Word files while preserving formatting and layout.</p>
+                        <button>Convert to Word</button>
+                    </div>
+                </div>
+
+                <!-- Image Resizer -->
+                <div class="tool-card" data-tool="image-resizer">
+                    <div class="tool-header">
+                        <i class="fas fa-expand-arrows-alt"></i>
+                        <h3>Image Resizer</h3>
+                    </div>
+                    <div class="tool-body">
+                        <p>Resize your images to exact dimensions or scale them by percentage. Maintain aspect ratio.</p>
+                        <button>Resize Image</button>
+                    </div>
+                </div>
+
+                <!-- PDF Protector -->
+                <div class="tool-card" data-tool="pdf-protector">
+                    <div class="tool-header">
+                        <i class="fas fa-lock"></i>
+                        <h3>PDF Protector</h3>
+                    </div>
+                    <div class="tool-body">
+                        <p>Add password protection and encryption to your PDF files to prevent unauthorized access.</p>
+                        <button>Protect PDF</button>
+                    </div>
+                </div>
+
+                <!-- PDF to Excel -->
+                <div class="tool-card" data-tool="pdf-to-excel">
+                    <div class="tool-header">
+                        <i class="fas fa-file-excel"></i>
+                        <h3>PDF to Excel</h3>
+                    </div>
+                    <div class="tool-body">
+                        <p>Extract tables from PDF and convert them to Excel spreadsheets for data analysis.</p>
+                        <button>Convert to Excel</button>
+                    </div>
+                </div>
+
+                <!-- PDF Merger -->
+                <div class="tool-card" data-tool="pdf-merger">
+                    <div class="tool-header">
+                        <i class="fas fa-object-group"></i>
+                        <h3>PDF Merger</h3>
+                    </div>
+                    <div class="tool-body">
+                        <p>Combine multiple PDF files into a single document. Rearrange pages as needed.</p>
+                        <button>Merge PDFs</button>
+                    </div>
+                </div>
+
+                <!-- Watermark Remover -->
+                <div class="tool-card" data-tool="watermark-remover">
+                    <div class="tool-header">
+                        <i class="fas fa-tint-slash"></i>
+                        <h3>Watermark Remover</h3>
+                    </div>
+                    <div class="tool-body">
+                        <p>Intelligently remove watermarks from images while preserving the underlying content.</p>
+                        <button>Remove Watermark</button>
+                    </div>
+                </div>
+
+                <!-- Background Remover -->
+                <div class="tool-card" data-tool="background-remover">
+                    <div class="tool-header">
+                        <i class="fas fa-cut"></i>
+                        <h3>Background Remover</h3>
+                    </div>
+                    <div class="tool-body">
+                        <p>Remove backgrounds from images automatically. Perfect for product photos and portraits.</p>
+                        <button>Remove Background</button>
+                    </div>
+                </div>
+            </section>
+
+            <div class="ad-container">
+                <div class="ad-label">Advertisement</div>
+                <div class="ad-placeholder">
+                    <!-- Google AdSense Ad Unit -->
+                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-EXAMPLE"
+                         data-ad-slot="EXAMPLE"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                    <script>
+                         (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+            </div>
+
+            <!-- Tool Interface (initially hidden) -->
+            <section class="tool-interface" id="tool-interface">
+                <h2 id="current-tool-title">Tool Name</h2>
+                
+                <div class="upload-area" id="drop-zone">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <h3>Drag & Drop your file here</h3>
+                    <p>or click to browse your files</p>
+                    <input type="file" id="file-input" hidden>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress" id="progress-bar"></div>
+                </div>
+
+                <div class="options-panel">
+                    <h3>Options</h3>
+                    <div class="option-group">
+                        <label for="quality">Quality Level</label>
+                        <input type="range" id="quality" min="1" max="100" value="85">
+                    </div>
+                    <div class="option-group">
+                        <label for="format">Output Format</label>
+                        <select id="format">
+                            <option value="jpg">JPEG</option>
+                            <option value="png">PNG</option>
+                            <option value="webp">WebP</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn btn-primary" id="process-btn">Process File</button>
+                    <button class="btn btn-secondary" id="back-btn">Back to Tools</button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <p>We provide free online tools to help you work with documents and images more efficiently.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#tools">All Tools</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#contact">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <ul class="footer-links">
+                    <li><i class="fas fa-envelope"></i> support@docimagetools.com</li>
+                    <li><i class="fas fa-globe"></i> www.docimagetools.com</li>
+                </ul>
+            </div>
+        </div>
+        <div class="container copyright">
+            <p>&copy; 2023 DocImage Tools. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tool selection functionality
+            const toolCards = document.querySelectorAll('.tool-card');
+            const toolInterface = document.getElementById('tool-interface');
+            const currentToolTitle = document.getElementById('current-tool-title');
+            const backBtn = document.getElementById('back-btn');
+            const dropZone = document.getElementById('drop-zone');
+            const fileInput = document.getElementById('file-input');
+            const processBtn = document.getElementById('process-btn');
+            const progressBar = document.getElementById('progress-bar');
+            
+            // Select first tool by default for demonstration
+            toolCards[0].closest('.container').classList.add('tool-active');
+            currentToolTitle.textContent = toolCards[0].querySelector('h3').textContent;
+            
+            // Tool selection
+            toolCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const toolName = this.getAttribute('data-tool');
+                    const toolTitle = this.querySelector('h3').textContent;
+                    
+                    // Update UI
+                    document.querySelectorAll('.tool-active').forEach(el => {
+                        el.classList.remove('tool-active');
+                    });
+                    this.closest('.container').classList.add('tool-active');
+                    currentToolTitle.textContent = toolTitle;
+                    
+                    // Scroll to tool interface
+                    toolInterface.scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+            
+            // Back button
+            backBtn.addEventListener('click', function() {
+                document.querySelectorAll('.tool-active').forEach(el => {
+                    el.classList.remove('tool-active');
+                });
+                
+                // Scroll to tools
+                document.getElementById('tools').scrollIntoView({ behavior: 'smooth' });
+            });
+            
+            // File upload - click to browse
+            dropZone.addEventListener('click', function() {
+                fileInput.click();
+            });
+            
+            // File upload - drag and drop
+            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+                dropZone.addEventListener(eventName, preventDefaults, false);
+            });
+            
+            function preventDefaults(e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+            
+            ['dragenter', 'dragover'].forEach(eventName => {
+                dropZone.addEventListener(eventName, highlight, false);
+            });
+            
+            ['dragleave', 'drop'].forEach(eventName => {
+                dropZone.addEventListener(eventName, unhighlight, false);
+            });
+            
+            function highlight() {
+                dropZone.style.borderColor = 'var(--accent)';
+                dropZone.style.backgroundColor = 'rgba(67, 97, 238, 0.05)';
+            }
+            
+            function unhighlight() {
+                dropZone.style.borderColor = 'var(--primary)';
+                dropZone.style.backgroundColor = '';
+            }
+            
+            dropZone.addEventListener('drop', handleDrop, false);
+            
+            function handleDrop(e) {
+                const dt = e.dataTransfer;
+                const files = dt.files;
+                handleFiles(files);
+            }
+            
+            function handleFiles(files) {
+                if (files.length > 0) {
+                    const file = files[0];
+                    // In a real application, you would process the file here
+                    dropZone.querySelector('h3').textContent = `Selected: ${file.name}`;
+                    dropZone.querySelector('p').textContent = `Size: ${formatFileSize(file.size)}`;
+                }
+            }
+            
+            function formatFileSize(bytes) {
+                if (bytes === 0) return '0 Bytes';
+                const k = 1024;
+                const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+                const i = Math.floor(Math.log(bytes) / Math.log(k));
+                return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+            }
+            
+            // File input change
+            fileInput.addEventListener('change', function() {
+                handleFiles(this.files);
+            });
+            
+            // Process button
+            processBtn.addEventListener('click', function() {
+                // Simulate processing
+                let width = 0;
+                const interval = setInterval(() => {
+                    if (width >= 100) {
+                        clearInterval(interval);
+                        // Show completion message
+                        dropZone.innerHTML = `
+                            <i class="fas fa-check-circle" style="color:var(--success)"></i>
+                            <h3>Processing Complete!</h3>
+                            <p>Your file has been processed successfully.</p>
+                            <button class="btn btn-primary" style="margin-top: 15px;">Download Processed File</button>
+                        `;
+                    } else {
+                        width += 2;
+                        progressBar.style.width = width + '%';
+                    }
+                }, 50);
+            });
+            
+            // Accessibility features
+            const textSizeControls = document.createElement('div');
+            textSizeControls.className = 'text-size';
+            textSizeControls.innerHTML = `
+                <button id="increase-text">A+</button>
+                <button id="reset-text">A</button>
+                <button id="decrease-text">A-</button>
+            `;
+            document.querySelector('.header-content').appendChild(textSizeControls);
+            
+            let currentFontSize = 16;
+            document.getElementById('increase-text').addEventListener('click', function() {
+                if (currentFontSize < 24) {
+                    currentFontSize += 2;
+                    document.body.style.fontSize = currentFontSize + 'px';
+                }
+            });
+            
+            document.getElementById('decrease-text').addEventListener('click', function() {
+                if (currentFontSize > 12) {
+                    currentFontSize -= 2;
+                    document.body.style.fontSize = currentFontSize + 'px';
+                }
+            });
+            
+            document.getElementById('reset-text').addEventListener('click', function() {
+                currentFontSize = 16;
+                document.body.style.fontSize = '16px';
+            });
+        });
+    </script>
+</body>
+</html>
